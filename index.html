@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+  <meta name="theme-color" content="#0A0907">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ferreira & Associados — Advocacia Estratégica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="cur"></div><div class="cring"></div>
+<div id="noise"></div>
+<canvas id="cv"></canvas>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="sp-ring"><div class="sp-rdot"></div>
+    <div class="sp-mono">F<span class="sp-amp">&</span>A</div>
+  </div>
+  <div class="sp-name">Ferreira &amp; Associados</div>
+  <div class="sp-line"><div class="sp-ll"></div><span>Advocacia · Estratégia · Excelência</span><div class="sp-ll"></div></div>
+  <div class="sp-stats">
+    <div class="sp-st"><span class="sp-sn">+120</span><span class="sp-sl">Casos Concluídos</span></div>
+    <div class="sp-st"><span class="sp-sn">4</span><span class="sp-sl">Anos de Mercado</span></div>
+    <div class="sp-st"><span class="sp-sn">6</span><span class="sp-sl">Advogados Especialistas</span></div>
+    <div class="sp-st"><span class="sp-sn">94%</span><span class="sp-sl">Clientes Satisfeitos</span></div>
+  </div>
+  <button class="sp-btn" onclick="enterSite()">Explorar Áreas de Atuação →</button>
+  <div class="sp-oab">OAB/GO 54.892 · Fundado em 2021 · Goiânia — GO</div>
+</div>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <div class="tb-l">
+    <div class="tb-badge">F&amp;A</div>
+    <div><div class="tb-nm">Ferreira &amp; Associados</div><div class="tb-sb">Advocacia &amp; Consultoria Estratégica</div></div>
+  </div>
+  <nav class="tb-nav">
+    <button class="tb-p" onclick="openPanel('escritorio')">O Escritório</button>
+    <button class="tb-p" onclick="openPanel('equipe')">Nossa Equipe</button>
+    <button class="tb-p" onclick="openPanel('casos')">Casos de Sucesso</button>
+  </nav>
+  <a href="https://wa.me/5562999999999" class="tb-wa" target="_blank">💬 Consulta Gratuita</a>
+</div>
+
+<!-- STAGE -->
+<div id="stage">
+  <div id="mapWrap">
+    <svg id="connSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+</div>
+
+<!-- BOTTOMBAR -->
+<div id="btmbar">
+  <div class="bb-l">
+    <div class="bb-cnt" id="bbCnt">01 / 06</div>
+    <div class="bb-area" id="bbArea">Direito Empresarial</div>
+  </div>
+  <div class="bb-dots" id="bbDots"></div>
+  <div class="bb-r">
+    <span class="bb-key">←</span><span class="bb-key">→</span>
+    <span style="font-size:9px;color:var(--di);letter-spacing:1.5px;text-transform:uppercase;">Nav</span>
+    <button class="bb-btn bb-ov" id="btnOv" onclick="toggleOv()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span>Visão Geral</span>
+    </button>
+    <button class="bb-btn bb-det" onclick="openD(ci)">Ver Detalhes</button>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div id="det" onclick="bgC(event)">
+  <div class="db">
+    <div class="db-bar" id="dBar"></div>
+    <div class="db-hd">
+      <div class="db-hl">
+        <div class="db-ico-box" id="dIcoBox"></div>
+        <div><div class="db-an" id="dN"></div><div class="db-ht" id="dT"></div></div>
+      </div>
+      <div class="db-hr">
+        <a href="https://wa.me/5562999999999" class="db-wabtn" target="_blank">📱 WhatsApp</a>
+        <button class="db-x" onclick="closeD()">✕</button>
+      </div>
+    </div>
+    <div class="db-tabs">
+      <button class="db-tab on" onclick="tab(0)">Visão Geral</button>
+      <button class="db-tab" onclick="tab(1)">Serviços</button>
+      <button class="db-tab" onclick="tab(2)">Resultados</button>
+      <button class="db-tab" onclick="tab(3)">Casos de Sucesso</button>
+      <button class="db-tab" onclick="tab(4)">Perguntas</button>
+    </div>
+    <div class="db-sep"></div>
+    <div class="db-body">
+      <div class="pn on" id="p0">
+        <p class="db-txt" id="dDesc"></p>
+        <div class="db-qt" id="dQ"></div>
+        <div class="db-tags" id="dTags"></div>
+        <div class="db-ctas">
+          <button class="db-cm" id="dCmBtn" onclick="window.open('https://wa.me/5562999999999','_blank')">Falar com Especialista →</button>
+          <button class="db-cs" onclick="tab(1)">Ver todos os serviços</button>
+        </div>
+      </div>
+      <div class="pn" id="p1">
+        <div class="db-g2" id="dSvcs"></div>
+        <div class="db-ctas"><button class="db-cm" id="dCmBtn2" onclick="window.open('https://wa.me/5562999999999','_blank')">Solicitar Consulta →</button></div>
+      </div>
+      <div class="pn" id="p2">
+        <div class="db-sg" id="dStats"></div>
+        <p class="db-txt" id="dSD" style="font-size:13px;margin-top:2px;"></p>
+        <div class="db-ctas"><button class="db-cm" id="dCmBtn3" onclick="window.open('https://wa.me/5562999999999','_blank')">Iniciar Consulta →</button></div>
+      </div>
+      <div class="pn" id="p3">
+        <div id="dCasos"></div>
+      </div>
+      <div class="pn" id="p4">
+        <div id="dFaq"></div>
+        <div class="db-ctas"><button class="db-cm" id="dCmBtn4" onclick="window.open('https://wa.me/5562999999999','_blank')">Falar com Advogado →</button></div>
+      </div>
+    </div>
+    <div class="db-ft">
+      <div class="db-fnav">
+        <button class="db-fn" onclick="navD(-1)">← Área Anterior</button>
+        <button class="db-fn" onclick="navD(1)">Próxima Área →</button>
+      </div>
+      <div class="db-fdots" id="dFdots"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- PANEL OVERLAY -->
+<div id="panelOverlay" onclick="closePanel()"></div>
+
+<!-- PANEL: ESCRITÓRIO -->
+<div class="panel" id="panel-escritorio">
+  <div class="panel-bar"></div>
+  <div class="panel-top">
+    <div><div class="panel-title">O Escritório</div><div class="panel-sub">Ferreira &amp; Associados</div></div>
+    <button class="panel-x" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body">
+    <div class="esc-hero">
+      <div class="esc-mono">F<span>&</span>A</div>
+      <div class="esc-tagline">Advocacia · Estratégia · Excelência · Goiânia — GO</div>
+    </div>
+    <div class="esc-stats">
+      <div class="esc-st"><span class="esc-sn">+120</span><span class="esc-sl">Casos concluídos</span></div>
+      <div class="esc-st"><span class="esc-sn">4 anos</span><span class="esc-sl">De mercado</span></div>
+      <div class="esc-st"><span class="esc-sn">6</span><span class="esc-sl">Advogados especialistas</span></div>
+      <div class="esc-st"><span class="esc-sn">94%</span><span class="esc-sl">Clientes satisfeitos</span></div>
+    </div>
+    <div class="esc-section">
+      <div class="esc-sh">Sobre o escritório</div>
+      <p class="esc-txt">Fundado em 2021, o escritório Ferreira &amp; Associados nasceu com um propósito claro: oferecer assessoria jurídica de alto nível para empresas e pessoas físicas em Goiânia, sem o distanciamento que grandes bancas impõem. Somos um escritório jovem, técnico e próximo do cliente — construído sobre casos reais, não sobre promessas.</p>
+      <br>
+      <p class="esc-txt">Atuamos em seis frentes especializadas — Empresarial, Trabalhista, Civil, Tributário, Imobiliário e Penal — com advogados que se dedicam exclusivamente às suas áreas. Essa especialização é o que nos permite entregar resultados que escritórios generalistas raramente alcançam.</p>
+    </div>
+    <div class="esc-section">
+      <div class="esc-sh">Nossos valores</div>
+      <div class="esc-vals">
+        <div class="esc-val">
+          <div class="esc-vi" style="background:rgba(74,158,255,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#4A9EFF" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <div><div class="esc-vt">Transparência total</div><div class="esc-vd">Honorários claros desde o início. Nenhuma surpresa no meio do processo.</div></div>
+        </div>
+        <div class="esc-val">
+          <div class="esc-vi" style="background:rgba(52,211,153,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div><div class="esc-vt">Respostas em até 24h</div><div class="esc-vd">Todo cliente tem acesso direto ao advogado responsável pelo caso, sem intermediários.</div></div>
+        </div>
+        <div class="esc-val">
+          <div class="esc-vi" style="background:rgba(167,139,250,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="esc-vt">Sigilo absoluto</div><div class="esc-vd">Informações dos clientes nunca são compartilhadas, em nenhuma circunstância.</div></div>
+        </div>
+        <div class="esc-val">
+          <div class="esc-vi" style="background:rgba(201,168,76,.15)"><svg viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div><div class="esc-vt">Foco em resultados concretos</div><div class="esc-vd">Não trabalhamos com falsas promessas. Analisamos cada caso com honestidade antes de aceitar o mandato.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="esc-section">
+      <div class="esc-sh">Contato &amp; Localização</div>
+      <div class="esc-contact">
+        <div class="esc-cl"><span class="esc-ci">📍</span><div class="esc-cv"><strong>Av. T-4, 1234, Sala 802</strong><br>Setor Bueno · Goiânia — GO · CEP 74.215-000</div></div>
+        <div class="esc-cl"><span class="esc-ci">📞</span><div class="esc-cv"><strong>(62) 9 9999-9999</strong> · Seg–Sex 8h–18h</div></div>
+        <div class="esc-cl"><span class="esc-ci">📧</span><div class="esc-cv"><strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7b4b8b9a3b6a3b897b1b2a5a5b2bea5b6b6a4a4b8b4beb6b3b8a4f9b6b3a1f9b5a5">[email&#160;protected]</a></strong></div></div>
+        <div class="esc-cl"><span class="esc-ci">⚖️</span><div class="esc-cv">OAB/GO 54.892 · Fundado em 2021</div></div>
+      </div>
+    </div>
+    <div class="esc-cta">
+      <button class="esc-wa" onclick="window.open('https://wa.me/5562999999999','_blank')">💬 Falar no WhatsApp</button>
+      <button class="esc-maps" onclick="window.open('https://maps.google.com','_blank')">📍 Ver no Mapa</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL: EQUIPE -->
+<div class="panel" id="panel-equipe">
+  <div class="panel-bar"></div>
+  <div class="panel-top">
+    <div><div class="panel-title">Nossa Equipe</div><div class="panel-sub">6 advogados especialistas</div></div>
+    <button class="panel-x" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body">
+    <p class="eq-intro">Um escritório é feito de pessoas. Conheça quem estará ao seu lado em cada etapa do processo.</p>
+
+    <div class="eq-card">
+      <div class="eq-avatar" style="background:linear-gradient(135deg,#4A9EFF,#2563EB)">RF</div>
+      <div class="eq-info">
+        <div class="eq-name">Rodrigo Ferreira</div>
+        <div class="eq-role" style="color:#4A9EFF">Sócio Fundador · Empresarial</div>
+        <div class="eq-oab">OAB/GO 54.892</div>
+        <div class="eq-bio">Mestre em Direito Empresarial pela UFG. Mais de 8 anos de experiência em contratos societários, fusões e reestruturação empresarial. Atua como conselheiro jurídico permanente de PMEs no Centro-Oeste.</div>
+        <div class="eq-spec"><span class="eq-sp">Societário</span><span class="eq-sp">M&A</span><span class="eq-sp">LGPD</span><span class="eq-sp">Contratos</span></div>
+      </div>
+    </div>
+
+    <div class="eq-sep"></div>
+
+    <div class="eq-card">
+      <div class="eq-avatar" style="background:linear-gradient(135deg,#A78BFA,#7C3AED)">LA</div>
+      <div class="eq-info">
+        <div class="eq-name">Letícia Andrade</div>
+        <div class="eq-role" style="color:#A78BFA">Sócia · Civil e Família</div>
+        <div class="eq-oab">OAB/GO 61.204</div>
+        <div class="eq-bio">Especialista em Direito de Família e Sucessões pela PUC-GO. Conduz casos com foco em soluções extrajudiciais e consensuais. Referência em holding familiar e planejamento patrimonial para famílias de médio patrimônio em Goiás.</div>
+        <div class="eq-spec"><span class="eq-sp">Família</span><span class="eq-sp">Inventário</span><span class="eq-sp">Holding</span><span class="eq-sp">Testamento</span></div>
+      </div>
+    </div>
+
+    <div class="eq-sep"></div>
+
+    <div class="eq-card">
+      <div class="eq-avatar" style="background:linear-gradient(135deg,#FF7B54,#DC2626)">MS</div>
+      <div class="eq-info">
+        <div class="eq-name">Marcos Souza</div>
+        <div class="eq-role" style="color:#FF7B54">Advogado Sênior · Trabalhista</div>
+        <div class="eq-oab">OAB/GO 58.731</div>
+        <div class="eq-bio">Formado pela UFG com especialização em Direito do Trabalho e Processo do Trabalho. Atua no TRT-18 com foco em defesa empresarial e acordos extrajudiciais. Responsável pela área de auditorias trabalhistas preventivas do escritório.</div>
+        <div class="eq-spec"><span class="eq-sp">CLT</span><span class="eq-sp">TRT-18</span><span class="eq-sp">Auditoria</span><span class="eq-sp">Rescisão</span></div>
+      </div>
+    </div>
+
+    <div class="eq-sep"></div>
+
+    <div class="eq-card">
+      <div class="eq-avatar" style="background:linear-gradient(135deg,#34D399,#059669)">PC</div>
+      <div class="eq-info">
+        <div class="eq-name">Paula Cavalcante</div>
+        <div class="eq-role" style="color:#34D399">Advogada Sênior · Tributário</div>
+        <div class="eq-oab">OAB/GO 63.087</div>
+        <div class="eq-bio">Especialista em Direito Tributário pelo IBET. Experiência em planejamento tributário para PMEs, impugnações administrativas perante a SEFAZ/GO e recuperação de créditos fiscais. Acompanha de perto as mudanças da reforma tributária e seus impactos práticos.</div>
+        <div class="eq-spec"><span class="eq-sp">Tributário</span><span class="eq-sp">ICMS</span><span class="eq-sp">Simples</span><span class="eq-sp">Reforma</span></div>
+      </div>
+    </div>
+
+    <div class="eq-sep"></div>
+
+    <div class="eq-card">
+      <div class="eq-avatar" style="background:linear-gradient(135deg,#F59E0B,#D97706)">BR</div>
+      <div class="eq-info">
+        <div class="eq-name">Bruno Resende</div>
+        <div class="eq-role" style="color:#F59E0B">Advogado · Imobiliário</div>
+        <div class="eq-oab">OAB/GO 67.412</div>
+        <div class="eq-bio">Especializado em Direito Imobiliário e Urbanístico. Conduz due diligences imobiliárias, regularizações fundiárias e contratos de incorporação. Com background anterior no mercado de loteamentos, traz visão prática das transações além da técnica jurídica.</div>
+        <div class="eq-spec"><span class="eq-sp">Imóveis</span><span class="eq-sp">Due Diligence</span><span class="eq-sp">Locação</span><span class="eq-sp">Usucapião</span></div>
+      </div>
+    </div>
+
+    <div class="eq-sep"></div>
+
+    <div class="eq-card">
+      <div class="eq-avatar" style="background:linear-gradient(135deg,#F87171,#DC2626)">TN</div>
+      <div class="eq-info">
+        <div class="eq-name">Thiago Nunes</div>
+        <div class="eq-role" style="color:#F87171">Advogado · Penal Estratégico</div>
+        <div class="eq-oab">OAB/GO 70.158</div>
+        <div class="eq-bio">Membro da Comissão de Direito Penal da OAB/GO. Especializado em crimes econômicos e tributários. Com passagem pela Defensoria Pública antes de ingressar na advocacia privada, traz uma visão estratégica única sobre a dinâmica dos processos criminais.</div>
+        <div class="eq-spec"><span class="eq-sp">Crimes Econômicos</span><span class="eq-sp">HC</span><span class="eq-sp">ANPP</span><span class="eq-sp">Sigilo</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL: CASOS DE SUCESSO -->
+<div class="panel" id="panel-casos">
+  <div class="panel-bar"></div>
+  <div class="panel-top">
+    <div><div class="panel-title">Casos de Sucesso</div><div class="panel-sub">Resultados reais · Clientes reais</div></div>
+    <button class="panel-x" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body">
+    <div class="cc-filter" id="ccFilter">
+      <button class="cc-ft on" onclick="filterCasos('todos',this)">Todos</button>
+      <button class="cc-ft" onclick="filterCasos('Empresarial',this)">Empresarial</button>
+      <button class="cc-ft" onclick="filterCasos('Trabalhista',this)">Trabalhista</button>
+      <button class="cc-ft" onclick="filterCasos('Civil',this)">Civil</button>
+      <button class="cc-ft" onclick="filterCasos('Tributário',this)">Tributário</button>
+      <button class="cc-ft" onclick="filterCasos('Imobiliário',this)">Imobiliário</button>
+      <button class="cc-ft" onclick="filterCasos('Penal',this)">Penal</button>
+    </div>
+    <div class="cc-count" id="ccCount">18 casos</div>
+    <div id="ccList"></div>
+  </div>
+</div>
+
+
+  <script src="script.js" defer></script>
+</body>
+</html>
